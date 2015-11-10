@@ -4,7 +4,6 @@
 from __future__ import unicode_literals
 
 import socket
-import json
 
 
 __all__ = ['Query', 'Socket']
@@ -33,7 +32,7 @@ class Query(object):
         if self._filters:
             for filter_line in self._filters:
                 request += '\nFilter: %s' % (filter_line)
-        request += '\nOutputFormat: json\nColumnHeaders: on\n'
+        request += '\nOutputFormat: python'
         return request
 
     def columns(self, *args):
@@ -64,7 +63,6 @@ class Socket(object):
             rawdata = s.makefile().read()
             if not rawdata:
                 return []
-            data = json.loads(rawdata)
-            return [dict(zip(data[0], value)) for value in data[1:]]
+            return rawdata
         finally:
             s.close()
