@@ -39,8 +39,13 @@ class Query(object):
         self._columns = args
         return self
 
-    def filter(self, filter_str):
-        self._filters.append(filter_str)
+    def filter(self, filter_str, and_str=None, or_str=None):
+        if and_str != None:
+            self._filters.append(filter_str + "\nAnd: " + and_str)
+        elif or_str != None:
+            self._filters.append(filter_str + "\nOr: " + or_str)
+        else:
+            self._filters.append(filter_str)
         return self
 
 
