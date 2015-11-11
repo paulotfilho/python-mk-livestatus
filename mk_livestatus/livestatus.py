@@ -32,7 +32,7 @@ class Query(object):
         if self._filters:
             for filter_line in self._filters:
                 request += '\nFilter: %s' % (filter_line)
-        request += '\nOutputFormat: python'
+            request += '\nOutputFormat: python'
         return request
 
     def columns(self, *args):
